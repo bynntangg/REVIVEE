@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Green Finance - REVIVEE</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Atas */
+        .app-header {
+            background: white;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eef2f6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            font-size: 1.3rem;
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .header-right i {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* MAIN SCROLLABLE CONTENT */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.2rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Page Title */
+        .page-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Grid Mobile */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .stat-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .stat-info p {
+            color: #64748b;
+            font-size: 0.7rem;
+        }
+
+        /* Wallet Section Mobile */
+        .wallet-section {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wallet-info h2 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .wallet-info p {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .balance-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .balance-label {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .balance-amount {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .balance-amount small {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .wallet-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .wallet-btn.primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .wallet-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .points-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .point-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .point-card i {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 0.3rem;
+        }
+
+        .point-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .point-card p {
+            color: #94a3b8;
+            font-size: 0.7rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .point-card small {
+            color: #10b981;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .section-title a {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        /* Finance Cards Scroll */
+        .finance-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .finance-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .finance-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            min-width: 260px;
+            border: 1px solid #eef2f6;
+            position: relative;
+        }
+
+        .finance-card.featured {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+        }
+
+        .finance-card.featured .card-title,
+        .finance-card.featured .card-desc,
+        .finance-card.featured .feature-item {
+            color: white;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            background: #fef3c7;
+            color: #f59e0b;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .finance-card.featured .card-icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .card-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .finance-card.featured .card-icon i {
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-desc {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-item i {
+            color: #10b981;
+            font-size: 0.7rem;
+        }
+
+        .finance-card.featured .feature-item i {
+            color: white;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .finance-card.featured .card-price {
+            color: white;
+        }
+
+        .card-button {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .finance-card.featured .card-button {
+            background: white;
+            color: #10b981;
+        }
+
+        /* Investment Cards */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .investment-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .investment-header h3 {
+            font-size: 1rem;
+        }
+
+        .risk-badge {
+            background: #dcfce7;
+            color: #10b981;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .risk-badge.medium {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .seller-name {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .investment-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .roi {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .tenor {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .progress-section {
+            margin-bottom: 0.8rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.2rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 4px;
+            background: #10b981;
+            border-radius: 2px;
+        }
+
+        .invest-min {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.8rem;
+        }
+
+        .invest-btn {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.6rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* ESG Section Mobile */
+        .esg-section {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .esg-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .esg-header h3 {
+            font-size: 1.1rem;
+        }
+
+        .search-seller {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-seller input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .search-seller button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .esg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .esg-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            align-items: center;
+            padding: 0.8rem;
+            background: #f8fafc;
+            border-radius: 16px;
+        }
+
+        .seller-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .seller-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .seller-location {
+            font-size: 0.65rem;
+            color: #64748b;
+        }
+
+        .category {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .rating-badge {
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .rating-platinum {
+            background: #e8e8ff;
+            color: #6366f1;
+        }
+
+        .rating-gold {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .rating-silver {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .action-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* Bottom Padding untuk navbar */
+        .bottom-padding {
+            height: 70px;
+        }
+
+        /* BOTTOM NAVBAR - FIXED */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 1rem 1rem;
+            border-top: 1px solid #eef2f6;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 0.2rem;
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+        }
+
+        .nav-item.active {
+            color: #10b981;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Atas -->
+    <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fa-solid fa-rotate-left"></i>
+                <h1>REVIVEE</h1>
+            </div>
+        </div>
+         <div class="header-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="profile">
+                <img src="/images/bintang.jpg" alt="profile">
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="scrollable-content">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Green Finance</h1>
+            <p>Solusi keuangan berkelanjutan untuk ekonomi sirkular</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Rp 2.4M</h3>
+                    <p>Total Pembiayaan</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>8.2K+</h3>
+                    <p>Pengguna Aktif</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>2.450</h3>
+                    <p>Total Poin</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>45.8T</h3>
+                    <p>CO₂ Tersimpan</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Section -->
+        <div class="wallet-section">
+            <div class="wallet-info">
+                <h2>REVIVEE Wallet</h2>
+                <p>Kelola saldo dan poin karbonmu</p>
+                
+                <div class="balance-card">
+                    <div class="balance-label">Saldo Tersedia</div>
+                    <div class="balance-amount">Rp 2.450.000 <small>/ 2.450 poin</small></div>
+                    <div class="wallet-actions">
+                        <button class="wallet-btn primary">Top Up</button>
+                        <button class="wallet-btn secondary">Riwayat</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="points-grid">
+                <div class="point-card">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>2.450</h3>
+                    <p>Carbon Points</p>
+                    <small>Konversi</small>
+                </div>
+                <div class="point-card">
+                    <i class="fa-solid fa-gift"></i>
+                    <h3>3</h3>
+                    <p>Reward</p>
+                    <small>Klaim</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layanan Finance -->
+        <div class="section-title">
+            <h2>Layanan Finance</h2>
+            <a href="#">Lihat Semua →</a>
+        </div>
+
+        <div class="finance-scroll">
+            <!-- Green PayLater -->
+            <div class="finance-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h3 class="card-title">Green PayLater</h3>
+                <p class="card-desc">Bayar nanti dengan bunga khusus</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Bunga 0% carbon score A</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Tenor 3, 6, 12 bulan</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">0%</span>
+                    <button class="card-button">Ajukan</button>
+                </div>
+            </div>
+
+            <!-- Carbon Reward -->
+            <div class="finance-card featured">
+                <span class="card-badge">POPULER</span>
+                <div class="card-icon">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <h3 class="card-title">Carbon Reward</h3>
+                <p class="card-desc">Tukarkan poin karbon jadi saldo</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>1 kg CO₂ = 100 poin</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Voucher belanja & donasi</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">2.450</span>
+                    <button class="card-button">Tukar</button>
+                </div>
+            </div>
+
+            <!-- Green Investment -->
+            <div class="finance-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="card-title">Green Investment</h3>
+                <p class="card-desc">Investasi ke UMKM sustainable</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>ROI 12-18% per tahun</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>Mulai Rp 1 Juta</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-price">12-18%</span>
+                    <button class="card-button">Investasi</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investasi Tersedia -->
+        <div class="section-title">
+            <h2>Investasi Tersedia</h2>
+            <a href="#">Lihat Semua →</a>
+        </div>
+
+        <div class="investment-grid">
+            <div class="investment-card">
+                <div class="investment-header">
+                    <h3>Batik EcoPrint</h3>
+                    <span class="risk-badge">Rendah</span>
+                </div>
+                <div class="seller-name">UMKM Batik Solo</div>
+                <div class="investment-meta">
+                    <span class="roi">ROI 15% p.a</span>
+                    <span class="tenor">Tenor 12 bln</span>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Terkumpul Rp 150Jt</span>
+                        <span>Target Rp 200Jt</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="invest-min">Minimal Rp 1 Juta</div>
+                <button class="invest-btn">Investasi Sekarang</button>
+            </div>
+
+            <div class="investment-card">
+                <div class="investment-header">
+                    <h3>Denim Revival</h3>
+                    <span class="risk-badge medium">Sedang</span>
+                </div>
+                <div class="seller-name">Thrift Shop Bandung</div>
+                <div class="investment-meta">
+                    <span class="roi">ROI 18% p.a</span>
+                    <span class="tenor">Tenor 12 bln</span>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Terkumpul Rp 280Jt</span>
+                        <span>Target Rp 600Jt</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="invest-min">Minimal Rp 2 Juta</div>
+                <button class="invest-btn">Investasi Sekarang</button>
+            </div>
+        </div>
+
+        <!-- ESG Scoring -->
+        <div class="esg-section">
+            <div class="esg-header">
+                <h3>ESG Scoring Seller</h3>
+                <div class="search-seller">
+                    <input type="text" placeholder="Cari seller..." id="sellerSearch">
+                    <button>Cari</button>
+                </div>
+            </div>
+
+            <div class="esg-list">
+                <div class="esg-item">
+                    <div class="seller-info">
+                        <span class="seller-name">Denim Revival</span>
+                        <span class="seller-location">Bandung</span>
+                    </div>
+                    <div class="category">Preloved</div>
+                    <span class="rating-badge rating-platinum">Platinum</span>
+                </div>
+
+                <div class="esg-item">
+                    <div class="seller-info">
+                        <span class="seller-name">Tech Revive</span>
+                        <span class="seller-location">Jakarta</span>
+                    </div>
+                    <div class="category">Refurbished</div>
+                    <span class="rating-badge rating-gold">Gold</span>
+                </div>
+
+                <div class="esg-item">
+                    <div class="seller-info">
+                        <span class="seller-name">Eco Furniture</span>
+                        <span class="seller-location">Jogja</span>
+                    </div>
+                    <div class="category">Upcycled</div>
+                    <span class="rating-badge rating-silver">Silver</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Padding -->
+        <div class="bottom-padding"></div>
+    </main>
+
+    <!-- BOTTOM NAVBAR - FIXED -->
+    <nav class="bottom-navbar">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="circular.html" class="nav-item">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Circular</span>
+        </a>
+        <a href="finance.html" class="nav-item active">
+            <i class="fa-solid fa-coins"></i>
+            <span>Finance</span>
+        </a>
+        <a href="impact.html" class="nav-item">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Impact</span>
+        </a>
+        <a href="community.html" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+    </nav>
+
+    <script>
+        // Add click handlers
+        document.querySelectorAll('.wallet-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent;
+                alert(`Fitur ${action} akan segera hadir!`);
+            });
+        });
+
+        document.querySelectorAll('.card-button, .invest-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Fitur sedang dalam pengembangan');
+            });
+        });
+
+        document.querySelectorAll('.point-card small').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Fitur akan segera hadir');
+            });
+        });
+
+        document.querySelector('.search-seller button').addEventListener('click', function() {
+            const query = document.getElementById('sellerSearch').value;
+            alert(query ? `Mencari seller: ${query}` : 'Masukkan nama seller');
+        });
+    </script>
+</body>
+</html>

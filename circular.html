@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Circular Hub - REVIVEE</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Atas */
+        .app-header {
+            background: white;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eef2f6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            font-size: 1.3rem;
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .header-right i {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* Search Container */
+        .search-container {
+            background: white;
+            padding: 0.5rem 1.2rem 1rem;
+            position: sticky;
+            top: 60px;
+            z-index: 9;
+        }
+
+        .search-box {
+            background: #f1f5f9;
+            border-radius: 30px;
+            padding: 0.7rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-box i {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+
+        /* MAIN SCROLLABLE CONTENT */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem 1.2rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Page Title */
+        .page-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Circular Hero */
+        .circular-hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .circular-hero-content h2 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.8rem;
+        }
+
+        .circular-hero-content p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .circular-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .circular-stat .number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #10b981;
+            display: block;
+        }
+
+        .circular-stat .label {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .hero-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .view-all {
+            color: #10b981;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            padding-bottom: 0.3rem;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .filter-tab.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* Sort Section */
+        .sort-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sort-section label {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .sort-section select {
+            padding: 0.4rem 1.5rem 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            font-size: 0.85rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #eef2f6;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: #10b981;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-image {
+            height: 130px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image i {
+            font-size: 2.5rem;
+            color: #94a3b8;
+        }
+
+        .carbon-chip {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .product-info {
+            padding: 0.8rem;
+        }
+
+        .product-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-seller {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .original-price {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            background: #fee2e2;
+            color: #ef4444;
+            padding: 0.1rem 0.4rem;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 0.65rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .esg-badge {
+            background: #e8f0fe;
+            color: #2563eb;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #f1f5f9;
+            border: none;
+            padding: 0.6rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        /* Circular Process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .process-step {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid #eef2f6;
+            position: relative;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #10b981;
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .step-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .process-step h4 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .process-step p {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* Impact Cards */
+        .impact-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 20px;
+            padding: 1.2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .impact-card i {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .impact-card p {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        /* Bottom Padding untuk navbar */
+        .bottom-padding {
+            height: 70px;
+        }
+
+        /* BOTTOM NAVBAR - FIXED */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 1rem 1rem;
+            border-top: 1px solid #eef2f6;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 0.2rem;
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+        }
+
+        .nav-item.active {
+            color: #10b981;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Atas -->
+    <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fa-solid fa-rotate-left"></i>
+                <h1>REVIVEE</h1>
+            </div>
+        </div>
+         <div class="header-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="profile">
+                <img src="/images/bintang.jpg" alt="profile">
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" placeholder="Cari produk circular...">
+        </div>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="scrollable-content">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Circular Hub</h1>
+            <p>Jelajahi ribuan produk circular dari UMKM Nusantara</p>
+        </div>
+
+        <!-- Circular Hero -->
+        <div class="circular-hero">
+            <div class="circular-hero-content">
+                <h2>Daur Ulang, Bukan Buang</h2>
+                <p>Setiap pembelian = aksi nyata untuk bumi</p>
+                
+                <div class="circular-stats">
+                    <div class="circular-stat">
+                        <span class="number">12.5K+</span>
+                        <span class="label">Produk</span>
+                    </div>
+                    <div class="circular-stat">
+                        <span class="number">8.2K+</span>
+                        <span class="label">UMKM</span>
+                    </div>
+                    <div class="circular-stat">
+                        <span class="number">45.8T</span>
+                        <span class="label">CO₂</span>
+                    </div>
+                </div>
+
+                <div class="hero-icons">
+                    <div class="hero-icon"><i class="fa-solid fa-recycle"></i></div>
+                    <div class="hero-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="hero-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active">Semua</button>
+            <button class="filter-tab">Preloved</button>
+            <button class="filter-tab">Refurbished</button>
+            <button class="filter-tab">Upcycled</button>
+            <button class="filter-tab">Sustainable</button>
+        </div>
+
+        <!-- Sort -->
+        <div class="sort-section">
+            <label>Urutkan:</label>
+            <select>
+                <option>Terpopuler</option>
+                <option>Terbaru</option>
+                <option>Harga Terendah</option>
+                <option>Harga Tertinggi</option>
+                <option>Carbon Score</option>
+            </select>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid"></div>
+
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2>Bagaimana Cara Kerjanya?</h2>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <h4>Donasi/Jual</h4>
+                <p>Setor produk bekas layak pakai</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-icon"><i class="fa-solid fa-rotate"></i></div>
+                <h4>Inspeksi</h4>
+                <p>Diperiksa & diperbaiki</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-icon"><i class="fa-solid fa-microchip"></i></div>
+                <h4>AI Pricing</h4>
+                <p>Harga & carbon check</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-icon"><i class="fa-solid fa-store"></i></div>
+                <h4>Dipasarkan</h4>
+                <p>Siap dibeli komunitas</p>
+            </div>
+        </div>
+
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2>Dampak Positif</h2>
+        </div>
+
+        <!-- Impact Cards -->
+        <div class="impact-cards">
+            <div class="impact-card">
+                <i class="fa-solid fa-water"></i>
+                <h3>12.5M Liter</h3>
+                <p>Air Terhemat</p>
+            </div>
+            
+            <div class="impact-card">
+                <i class="fa-solid fa-trash"></i>
+                <h3>45.8 Ton</h3>
+                <p>Sampah Berkurang</p>
+            </div>
+            
+            <div class="impact-card">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>2.3 MW</h3>
+                <p>Energi Tersimpan</p>
+            </div>
+            
+            <div class="impact-card">
+                <i class="fa-solid fa-tree"></i>
+                <h3>12.000+</h3>
+                <p>Pohon Terselamatkan</p>
+            </div>
+        </div>
+
+        <!-- Bottom Padding -->
+        <div class="bottom-padding"></div>
+    </main>
+
+    <!-- BOTTOM NAVBAR - FIXED -->
+    <nav class="bottom-navbar">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="circular.html" class="nav-item active">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Circular</span>
+        </a>
+        <a href="finance.html" class="nav-item">
+            <i class="fa-solid fa-coins"></i>
+            <span>Finance</span>
+        </a>
+        <a href="impact.html" class="nav-item">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Impact</span>
+        </a>
+        <a href="community.html" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+    </nav>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Vintage Denim",
+                seller: "Denim Revival",
+                location: "Bandung",
+                price: 185000,
+                originalPrice: 450000,
+                category: "Preloved",
+                carbonSaved: 3.2,
+                carbonScore: 88,
+                esg: "Platinum",
+                icon: "fa-tshirt"
+            },
+            {
+                id: 2,
+                name: "iPhone X",
+                seller: "Tech Revive",
+                location: "Jakarta",
+                price: 4200000,
+                originalPrice: 8000000,
+                category: "Refurbished",
+                carbonSaved: 25,
+                carbonScore: 92,
+                esg: "Gold",
+                icon: "fa-mobile-alt"
+            },
+            {
+                id: 3,
+                name: "Wood Table",
+                seller: "Eco Furniture",
+                location: "Yogyakarta",
+                price: 350000,
+                originalPrice: 600000,
+                category: "Upcycled",
+                carbonSaved: 8.5,
+                carbonScore: 78,
+                esg: "Silver",
+                icon: "fa-couch"
+            },
+            {
+                id: 4,
+                name: "Batik Ecoprint",
+                seller: "Batik Nusantara",
+                location: "Solo",
+                price: 275000,
+                originalPrice: 350000,
+                category: "Sustainable",
+                carbonSaved: 1.8,
+                carbonScore: 95,
+                esg: "Platinum",
+                icon: "fa-paint-brush"
+            },
+            {
+                id: 5,
+                name: "Canvas Bag",
+                seller: "Bag Revival",
+                location: "Bogor",
+                price: 125000,
+                originalPrice: 300000,
+                category: "Preloved",
+                carbonSaved: 2.1,
+                carbonScore: 85,
+                esg: "Gold",
+                icon: "fa-bag-shopping"
+            },
+            {
+                id: 6,
+                name: "MacBook Air",
+                seller: "Apple Circular",
+                location: "Tangerang",
+                price: 8500000,
+                originalPrice: 15000000,
+                category: "Refurbished",
+                carbonSaved: 45,
+                carbonScore: 90,
+                esg: "Platinum",
+                icon: "fa-laptop"
+            }
+        ];
+
+        // Load products
+        function loadProducts() {
+            const grid = document.getElementById('productGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                
+                const card = `
+                    <div class="product-card" data-category="${product.category.toLowerCase()}">
+                        <span class="product-badge">${product.category}</span>
+                        <div class="product-image">
+                            <i class="fas ${product.icon}"></i>
+                            <div class="carbon-chip">
+                                <i class="fa-solid fa-leaf" style="color: #10b981;"></i> ${product.carbonScore}
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-title">${product.name}</h4>
+                            <p class="product-seller">${product.seller}</p>
+                            <div class="price-section">
+                                <span class="current-price">Rp ${(product.price/1000).toFixed(0)}k</span>
+                                <span class="original-price">Rp ${(product.originalPrice/1000).toFixed(0)}k</span>
+                                <span class="discount">-${discount}%</span>
+                            </div>
+                            <div class="product-meta">
+                                <span><i class="fa-regular fa-clock"></i> ${product.carbonSaved} kg</span>
+                                <span><i class="fa-solid fa-location-dot"></i> ${product.location}</span>
+                            </div>
+                            <span class="esg-badge">ESG ${product.esg}</span>
+                            <button class="add-to-cart" onclick="addToCart('${product.name}')">
+                                <i class="fa-regular fa-bag-shopping"></i> Keranjang
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                grid.innerHTML += card;
+            });
+        }
+
+        // Add to cart
+        function addToCart(productName) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #10b981;
+                color: white;
+                padding: 0.8rem 1.5rem;
+                border-radius: 30px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.innerHTML = `<i class="fa-regular fa-circle-check"></i> ${productName} ditambahkan`;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 2000);
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.textContent.toLowerCase();
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (category === 'semua' || product.dataset.category === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Sort select
+        document.querySelector('select').addEventListener('change', function() {
+            const sortBy = this.value;
+            // Implement sorting logic here
+        });
+
+        // Initialize
+        window.addEventListener('load', loadProducts);
+    </script>
+</body>
+</html>

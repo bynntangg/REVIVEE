@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>REVIVEE ♻️ - Circular Fashion & Tech for Future</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header (atas, tidak fixed) -->
+    <header class="app-header">
+        <div class="header-left">
+            <i class="fa-solid fa-bars menu-icon"></i>
+            <div class="logo">
+                <i class="fa-solid fa-rotate-left"></i>
+                <h1>REVIVEE</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="profile">
+                <img src="/images/bintang.jpg" alt="profile">
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar (di bawah header) -->
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" placeholder="Cari vintage, refurbished, upcycled...">
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT - SCROLLABLE AREA -->
+    <main class="scrollable-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="chip">♻️ Ekonomi Sirkular</span>
+                <h1>Belanja Kekinian,<br>Selamatkan Bumi</h1>
+                <p>Platform circular e-commerce pertama di Indonesia dengan AI Carbon Intelligence.</p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>12.5k+</h3>
+                        <p>Produk</p>
+                    </div>
+                    <div class="stat">
+                        <h3>8.2k+</h3>
+                        <p>UMKM</p>
+                    </div>
+                    <div class="stat">
+                        <h3>45.8t</h3>
+                        <p>CO₂</p>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-primary">
+                        Mulai Belanja
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop"
+                    alt="hero" class="hero-image">
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <div class="section-header">
+                <h2>Kategori</h2>
+                <a href="#" class="view-all">Lihat Semua</a>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card" data-category="preloved">
+                    <div class="category-icon" style="background: #FFE8E8;">
+                        <i class="fa-solid fa-shirt" style="color: #FF5E5E;"></i>
+                    </div>
+                    <h4>Preloved</h4>
+                    <span class="count">1.234</span>
+                </div>
+
+                <div class="category-card" data-category="refurbished">
+                    <div class="category-icon" style="background: #E8F0FF;">
+                        <i class="fa-solid fa-laptop" style="color: #2E7DFF;"></i>
+                    </div>
+                    <h4>Refurbished</h4>
+                    <span class="count">856</span>
+                </div>
+
+                <div class="category-card" data-category="upcycled">
+                    <div class="category-icon" style="background: #E8FFE8;">
+                        <i class="fa-solid fa-couch" style="color: #00B300;"></i>
+                    </div>
+                    <h4>Upcycled</h4>
+                    <span class="count">567</span>
+                </div>
+
+                <div class="category-card" data-category="sustainable">
+                    <div class="category-icon" style="background: #FFF3E0;">
+                        <i class="fa-solid fa-leaf" style="color: #FF9800;"></i>
+                    </div>
+                    <h4>Sustainable</h4>
+                    <span class="count">789</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured">
+            <div class="section-header">
+                <h2>Rekomendasi Untukmu</h2>
+                <a href="#" class="view-all">Lihat Semua</a>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="tab-btn active">Semua</button>
+                <button class="tab-btn">Preloved</button>
+                <button class="tab-btn">Refurbished</button>
+                <button class="tab-btn">Upcycled</button>
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+
+        <!-- Carbon Dashboard -->
+        <section class="carbon-dashboard">
+            <div class="dashboard-card">
+                <div class="dashboard-header">
+                    <span class="chip">🌱 CARBON INSIGHT</span>
+                    <h3>Dampak Karbonmu</h3>
+                </div>
+
+                <div class="carbon-stat">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <p class="stat-value">245 kg CO₂</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <span class="stat-compare">65% dari target</span>
+                    </div>
+                </div>
+
+                <div class="carbon-equivalent">
+                    <div class="equiv-item">
+                        <i class="fa-solid fa-tree"></i>
+                        <div>
+                            <span>Setara 12 pohon</span>
+                        </div>
+                    </div>
+                    <div class="equiv-item">
+                        <i class="fa-solid fa-car"></i>
+                        <div>
+                            <span>1.020 km</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Green Finance -->
+        <section class="green-finance">
+            <div class="section-header">
+                <h2>Green Finance</h2>
+                <a href="#" class="view-all">Lihat Semua</a>
+            </div>
+
+            <div class="finance-scroll">
+                <div class="finance-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h4>Green PayLater</h4>
+                    <p>Bunga 0%</p>
+                </div>
+
+                <div class="finance-card featured">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h4>Carbon Reward</h4>
+                    <p>2.450 poin</p>
+                </div>
+
+                <div class="finance-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4>Investment</h4>
+                    <p>ROI 15-20%</p>
+                </div>
+
+                <div class="finance-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h4>ESG Scoring</h4>
+                    <p>Cek seller</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- UMKM Section -->
+        <section class="umkm">
+            <div class="section-header">
+                <h2>UMKM Pilihan</h2>
+                <a href="#" class="view-all">Lihat Semua</a>
+            </div>
+
+            <div class="umkm-scroll">
+                <div class="umkm-card">
+                    <div class="umkm-image">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&auto=format&fit=crop"
+                            alt="denim revival">
+                    </div>
+                    <div class="umkm-info">
+                        <h4>Denim Revival</h4>
+                        <span>Bandung ⭐ 4.8</span>
+                    </div>
+                </div>
+
+                <div class="umkm-card">
+                    <div class="umkm-image">
+                        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa56ba9?w=400&auto=format&fit=crop"
+                            alt="tech revive">
+                    </div>
+                    <div class="umkm-info">
+                        <h4>Tech Revive</h4>
+                        <span>Jakarta ⭐ 4.9</span>
+                    </div>
+                </div>
+
+                <div class="umkm-card">
+                    <div class="umkm-image">
+                        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&auto=format&fit=crop"
+                            alt="eco furniture">
+                    </div>
+                    <div class="umkm-info">
+                        <h4>Eco Furniture</h4>
+                        <span>Yogyakarta ⭐ 4.7</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Stats -->
+        <section class="impact">
+            <div class="impact-content">
+                <h3>SDGs Impact</h3>
+                <div class="impact-stats">
+                    <div class="impact-stat">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>8.200+ UMKM</span>
+                    </div>
+                    <div class="impact-stat">
+                        <i class="fa-solid fa-recycle"></i>
+                        <span>12.5k produk</span>
+                    </div>
+                    <div class="impact-stat">
+                        <i class="fa-solid fa-cloud"></i>
+                        <span>45.8t CO₂</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom padding untuk navbar -->
+        <div class="bottom-padding"></div>
+    </main>
+
+    <!-- BOTTOM NAVBAR - FIXED -->
+    <nav class="bottom-navbar">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="circular.html" class="nav-item">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Circular</span>
+        </a>
+        <a href="finance.html" class="nav-item">
+            <i class="fa-solid fa-coins"></i>
+            <span>Finance</span>
+        </a>
+        <a href="impact.html" class="nav-item">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Impact</span>
+        </a>
+        <a href="community.html" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+    </nav>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>

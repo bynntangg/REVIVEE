@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Dampak & SDGs - REVIVEE</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Atas */
+        .app-header {
+            background: white;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eef2f6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            font-size: 1.3rem;
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .header-right i {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* MAIN SCROLLABLE CONTENT */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.2rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hero Section Mobile */
+        .impact-hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .impact-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-chip {
+            background: rgba(16,185,129,0.2);
+            color: #10b981;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .impact-hero h1 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .impact-hero p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat .number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #10b981;
+            display: block;
+        }
+
+        .hero-stat .label {
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .overview-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overview-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .overview-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .overview-info p {
+            color: #64748b;
+            font-size: 0.7rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            margin: 1.5rem 0 1rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* SDGs Cards */
+        .sdgs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sdg-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid #eef2f6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sdg-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #10b981;
+            opacity: 0.1;
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+        }
+
+        .sdg-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .sdg-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sdg-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .sdg-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .sdg-header h4 {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .sdg-card p {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .sdg-progress .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.3rem;
+        }
+
+        .progress-fill {
+            height: 4px;
+            background: #10b981;
+            border-radius: 2px;
+        }
+
+        .sdg-target {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        /* Carbon Section */
+        .carbon-section {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .carbon-header {
+            margin-bottom: 1rem;
+        }
+
+        .carbon-header h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .carbon-header p {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .carbon-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .carbon-metric {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 18px;
+            padding: 1rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carbon-metric::after {
+            content: 'CO₂';
+            position: absolute;
+            bottom: 0;
+            right: 0.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            opacity: 0.1;
+            color: white;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .metric-sub {
+            color: #94a3b8;
+            font-size: 0.6rem;
+        }
+
+        .equivalents-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .equivalent-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .equivalent-icon {
+            width: 32px;
+            height: 32px;
+            background: #e8f5e9;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.3rem;
+        }
+
+        .equivalent-icon i {
+            font-size: 1rem;
+            color: #10b981;
+        }
+
+        .equivalent-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .equivalent-label {
+            color: #64748b;
+            font-size: 0.6rem;
+        }
+
+        /* Timeline Mobile */
+        .timeline {
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-top: 0.3rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-year {
+            background: #e8f5e9;
+            color: #10b981;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-desc {
+            color: #64748b;
+            font-size: 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-metric {
+            color: #10b981;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* UMKM Impact */
+        .umkm-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .umkm-card {
+            background: white;
+            border-radius: 18px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #eef2f6;
+        }
+
+        .umkm-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+        }
+
+        .umkm-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .umkm-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .umkm-label {
+            color: #64748b;
+            font-size: 0.7rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .umkm-trend {
+            color: #10b981;
+            font-size: 0.6rem;
+        }
+
+        /* Goals Cards */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .goal-card {
+            background: white;
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid #eef2f6;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .goal-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f5e9;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .goal-icon i {
+            font-size: 1.2rem;
+            color: #10b981;
+        }
+
+        .goal-content {
+            flex: 1;
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .goal-header h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .goal-percent {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .goal-current {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-progress .progress-bar {
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
+        }
+
+        .goal-progress .progress-fill {
+            height: 4px;
+            background: #10b981;
+            border-radius: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            margin: 1.5rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-section p {
+            opacity: 0.9;
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            background: white;
+            color: #10b981;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Bottom Padding untuk navbar */
+        .bottom-padding {
+            height: 70px;
+        }
+
+        /* BOTTOM NAVBAR - FIXED */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 1rem 1rem;
+            border-top: 1px solid #eef2f6;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 0.2rem;
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+        }
+
+        .nav-item.active {
+            color: #10b981;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Atas -->
+    <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fa-solid fa-rotate-left"></i>
+                <h1>REVIVEE</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="profile">
+                <img src="/images/bintang.jpg" alt="profile">
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="scrollable-content">
+        <!-- Hero Section -->
+        <div class="impact-hero">
+            <div class="impact-hero-content">
+                <span class="hero-chip">🌍 SDGs IMPACT</span>
+                <h1>Bersama REVIVEE,<br>Kita Ciptakan Dampak</h1>
+                <p>Setiap transaksi berkontribusi pada masa depan yang lebih hijau</p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="number">45.8 Ton</span>
+                        <span class="label">CO₂ Tersimpan</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number">12.5K+</span>
+                        <span class="label">Produk Circular</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number">8.2K+</span>
+                        <span class="label">UMKM Aktif</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="overview-grid">
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="overview-info">
+                    <h3>45.8T</h3>
+                    <p>CO₂ Tersimpan</p>
+                </div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <div class="overview-info">
+                    <h3>12.5M L</h3>
+                    <p>Air Terhemat</p>
+                </div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                <div class="overview-info">
+                    <h3>23.4T</h3>
+                    <p>Sampah Berkurang</p>
+                </div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="overview-info">
+                    <h3>2.3 MW</h3>
+                    <p>Energi Terhemat</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SDGs Section -->
+        <div class="section-title">
+            <h2>Kontribusi pada SDGs</h2>
+            <p>REVIVEE berkontribusi pada 3 tujuan utama</p>
+        </div>
+
+        <div class="sdgs-grid">
+            <!-- SDG 8 -->
+            <div class="sdg-card">
+                <div class="sdg-number">8</div>
+                <div class="sdg-header">
+                    <div class="sdg-icon">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <h3>SDG 8</h3>
+                        <h4>Pekerjaan Layak & Ekonomi</h4>
+                    </div>
+                </div>
+                <p>8.200+ UMKM lokal terberdayakan dengan ekonomi sirkular</p>
+                <div class="sdg-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="sdg-target">Target: 15.000 UMKM</div>
+                </div>
+            </div>
+
+            <!-- SDG 12 -->
+            <div class="sdg-card">
+                <div class="sdg-number">12</div>
+                <div class="sdg-header">
+                    <div class="sdg-icon">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <div>
+                        <h3>SDG 12</h3>
+                        <h4>Konsumsi Berkelanjutan</h4>
+                    </div>
+                </div>
+                <p>12.500+ produk circular, mengurangi limbah dan memperpanjang siklus produk</p>
+                <div class="sdg-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                    <div class="sdg-target">Target: 50.000 ton sampah berkurang</div>
+                </div>
+            </div>
+
+            <!-- SDG 13 -->
+            <div class="sdg-card">
+                <div class="sdg-number">13</div>
+                <div class="sdg-header">
+                    <div class="sdg-icon">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <div>
+                        <h3>SDG 13</h3>
+                        <h4>Aksi Iklim</h4>
+                    </div>
+                </div>
+                <p>45.8 ton CO₂ tersimpan, setara menanam 2.000 pohon</p>
+                <div class="sdg-progress">
+                    <div class="progress-header">
+                        <span>Progress</span>
+                        <span>45%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%"></div>
+                    </div>
+                    <div class="sdg-target">Target: 100 ton CO₂</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carbon Impact -->
+        <div class="carbon-section">
+            <div class="carbon-header">
+                <h2>🌱 Carbon Impact</h2>
+                <p>Setiap kg CO₂ membawa kita lebih dekat ke masa depan hijau</p>
+            </div>
+
+            <div class="carbon-metrics">
+                <div class="carbon-metric">
+                    <div class="metric-label">Total Karbon</div>
+                    <div class="metric-value">45.8</div>
+                    <div class="metric-sub">Ton CO₂</div>
+                </div>
+                
+                <div class="carbon-metric">
+                    <div class="metric-label">Rata-rata</div>
+                    <div class="metric-value">3.2</div>
+                    <div class="metric-sub">kg CO₂/produk</div>
+                </div>
+            </div>
+
+            <div class="equivalents-grid">
+                <div class="equivalent-card">
+                    <div class="equivalent-icon">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <div class="equivalent-value">2.000</div>
+                    <div class="equivalent-label">Pohon</div>
+                </div>
+                
+                <div class="equivalent-card">
+                    <div class="equivalent-icon">
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                    <div class="equivalent-value">1.020 km</div>
+                    <div class="equivalent-label">Mobil</div>
+                </div>
+                
+                <div class="equivalent-card">
+                    <div class="equivalent-icon">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
+                    <div class="equivalent-value">5.000 km</div>
+                    <div class="equivalent-label">Terbang</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="section-title">
+            <h2>📈 Perjalanan Dampak</h2>
+            <p>Dari awal berdiri hingga sekarang</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2022 - Q1</span>
+                    <div class="timeline-title">REVIVEE Lahir</div>
+                    <div class="timeline-desc">Platform circular e-commerce pertama</div>
+                    <div class="timeline-metric">✓ 100 UMKM pertama</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2022 - Q4</span>
+                    <div class="timeline-title">1.000 Ton CO₂</div>
+                    <div class="timeline-desc">Milestone pertama penyimpanan karbon</div>
+                    <div class="timeline-metric">✓ 1.000+ UMKM</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2023 - Q2</span>
+                    <div class="timeline-title">AI Carbon Intelligence</div>
+                    <div class="timeline-desc">Fitur estimasi jejak karbon</div>
+                    <div class="timeline-metric">✓ 10.000+ produk</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2024</span>
+                    <div class="timeline-title">45.8 Ton CO₂</div>
+                    <div class="timeline-desc">Terus berkembang bersama UMKM</div>
+                    <div class="timeline-metric">🎯 Target: 100 Ton</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UMKM Impact -->
+        <div class="section-title">
+            <h2>💚 Dampak untuk UMKM</h2>
+            <p>Memberdayakan ribuan pengrajin lokal</p>
+        </div>
+
+        <div class="umkm-grid">
+            <div class="umkm-card">
+                <div class="umkm-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div class="umkm-number">8.200+</div>
+                <div class="umkm-label">UMKM Aktif</div>
+                <div class="umkm-trend">↑ 45% dari 2023</div>
+            </div>
+            
+            <div class="umkm-card">
+                <div class="umkm-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="umkm-number">Rp 24M</div>
+                <div class="umkm-label">Omzet Rata-rata</div>
+                <div class="umkm-trend">↑ 28% dari 2023</div>
+            </div>
+            
+            <div class="umkm-card">
+                <div class="umkm-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="umkm-number">15.000+</div>
+                <div class="umkm-label">Tenaga Kerja</div>
+                <div class="umkm-trend">↑ 32% dari 2023</div>
+            </div>
+            
+            <div class="umkm-card">
+                <div class="umkm-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="umkm-number">4.8</div>
+                <div class="umkm-label">Rating</div>
+                <div class="umkm-trend">⭐ Tertinggi</div>
+            </div>
+        </div>
+
+        <!-- Future Goals -->
+        <div class="section-title">
+            <h2>🎯 Target 2025</h2>
+        </div>
+
+        <div class="goals-grid">
+            <div class="goal-card">
+                <div class="goal-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="goal-content">
+                    <div class="goal-header">
+                        <h3>CO₂ Tersimpan</h3>
+                        <span class="goal-percent">45%</span>
+                    </div>
+                    <div class="goal-current">45.8 Ton / 100 Ton</div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="goal-card">
+                <div class="goal-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <div class="goal-content">
+                    <div class="goal-header">
+                        <h3>UMKM Aktif</h3>
+                        <span class="goal-percent">55%</span>
+                    </div>
+                    <div class="goal-current">8.200 / 15.000</div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="goal-card">
+                <div class="goal-icon">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <div class="goal-content">
+                    <div class="goal-header">
+                        <h3>Produk Circular</h3>
+                        <span class="goal-percent">25%</span>
+                    </div>
+                    <div class="goal-current">12.500 / 50.000</div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Mulai Dampakmu Sekarang</h2>
+            <p>Setiap pembelian produk circular adalah kontribusi nyata</p>
+            <div class="cta-buttons">
+                <button class="cta-primary">Belanja Sekarang</button>
+                <button class="cta-secondary">Lihat Video</button>
+            </div>
+        </div>
+
+        <!-- Bottom Padding -->
+        <div class="bottom-padding"></div>
+    </main>
+
+    <!-- BOTTOM NAVBAR - FIXED -->
+    <nav class="bottom-navbar">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="circular.html" class="nav-item">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Circular</span>
+        </a>
+        <a href="finance.html" class="nav-item">
+            <i class="fa-solid fa-coins"></i>
+            <span>Finance</span>
+        </a>
+        <a href="impact.html" class="nav-item active">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Impact</span>
+        </a>
+        <a href="community.html" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+    </nav>
+
+    <script>
+        // Simple click handlers
+        document.querySelectorAll('.cta-primary, .cta-secondary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Fitur akan segera hadir!');
+            });
+        });
+
+        // Timeline click
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const year = this.querySelector('.timeline-year').textContent;
+                alert(`✨ ${year} - Lihat detail lebih lanjut`);
+            });
+        });
+
+        // SDG card click
+        document.querySelectorAll('.sdg-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const sdg = this.querySelector('h3').textContent;
+                alert(`📊 ${sdg} - Lihat detail kontribusi`);
+            });
+        });
+    </script>
+</body>
+</html>

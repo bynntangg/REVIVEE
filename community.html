@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Komunitas - REVIVEE</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Atas */
+        .app-header {
+            background: white;
+            padding: 1rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eef2f6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            font-size: 1.3rem;
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: #10b981;
+        }
+
+        .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .header-right i {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* Search Container */
+        .search-container {
+            background: white;
+            padding: 0.5rem 1.2rem 1rem;
+            position: sticky;
+            top: 60px;
+            z-index: 9;
+        }
+
+        .search-box {
+            background: #f1f5f9;
+            border-radius: 30px;
+            padding: 0.7rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-box i {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+
+        /* MAIN SCROLLABLE CONTENT */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.2rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hero Section Mobile */
+        .community-hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .hero-stat .number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #10b981;
+            display: block;
+        }
+
+        .hero-stat .label {
+            color: #94a3b8;
+            font-size: 0.6rem;
+        }
+
+        /* Quick Actions Scroll */
+        .quick-actions {
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .quick-actions::-webkit-scrollbar {
+            display: none;
+        }
+
+        .action-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .action-btn.primary {
+            background: #10b981;
+            color: white;
+            border: none;
+        }
+
+        /* Feed Section */
+        .feed-section {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feed-tabs {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            padding-bottom: 0.3rem;
+        }
+
+        .feed-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .feed-tab {
+            padding: 0.4rem 0;
+            font-weight: 600;
+            color: #64748b;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+
+        .feed-tab.active {
+            color: #10b981;
+            border-bottom-color: #10b981;
+        }
+
+        /* Post Item */
+        .post-item {
+            display: flex;
+            gap: 0.8rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .post-content {
+            flex: 1;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .author-badge {
+            background: #e8f5e9;
+            color: #10b981;
+            padding: 0.15rem 0.5rem;
+            border-radius: 30px;
+            font-size: 0.55rem;
+            font-weight: 600;
+        }
+
+        .post-time {
+            color: #94a3b8;
+            font-size: 0.65rem;
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .post-excerpt {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tag {
+            background: #f1f5f9;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            color: #64748b;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #94a3b8;
+            font-size: 0.7rem;
+        }
+
+        .post-stat i {
+            font-size: 0.8rem;
+        }
+
+        /* Sidebar Cards */
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h3 {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .card-header a {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        /* Topic Items */
+        .topic-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+
+        .topic-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .topic-name i {
+            color: #10b981;
+            font-size: 0.7rem;
+        }
+
+        .topic-count {
+            background: #f1f5f9;
+            padding: 0.15rem 0.5rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            color: #64748b;
+        }
+
+        /* Member Items */
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem 0;
+        }
+
+        .member-rank {
+            width: 22px;
+            height: 22px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .member-rank.gold {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .member-points {
+            font-size: 0.6rem;
+            color: #10b981;
+        }
+
+        .member-level {
+            background: #f1f5f9;
+            padding: 0.15rem 0.5rem;
+            border-radius: 30px;
+            font-size: 0.55rem;
+            color: #64748b;
+        }
+
+        /* Event Items */
+        .event-item {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-date {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 0.3rem;
+            text-align: center;
+            min-width: 45px;
+        }
+
+        .event-date .day {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #10b981;
+            display: block;
+        }
+
+        .event-date .month {
+            font-size: 0.55rem;
+            color: #64748b;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.6rem;
+            color: #64748b;
+        }
+
+        .event-meta i {
+            color: #10b981;
+            margin-right: 0.2rem;
+            font-size: 0.6rem;
+        }
+
+        /* Challenge Cards */
+        .challenges-section {
+            margin: 1.5rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .section-header a {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .challenge-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem;
+        }
+
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .challenge-prize {
+            background: #fef3c7;
+            color: #f59e0b;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        .challenge-desc {
+            color: #64748b;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 4px;
+            background: #10b981;
+            border-radius: 2px;
+        }
+
+        .join-challenge {
+            width: 100%;
+            background: #f1f5f9;
+            border: none;
+            padding: 0.6rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Leaders Grid */
+        .leaders-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .leader-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .leader-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .leader-title {
+            color: #10b981;
+            font-size: 0.65rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-stats {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 0.6rem;
+            color: #64748b;
+        }
+
+        .leader-stats i {
+            color: #10b981;
+            margin-right: 0.2rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            margin: 1.5rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-section p {
+            opacity: 0.9;
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cta-button {
+            background: white;
+            color: #10b981;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Bottom Padding */
+        .bottom-padding {
+            height: 70px;
+        }
+
+        /* BOTTOM NAVBAR - FIXED */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0.5rem 1rem 1rem;
+            border-top: 1px solid #eef2f6;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.02);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            gap: 0.2rem;
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+        }
+
+        .nav-item.active {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Atas -->
+    <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <i class="fa-solid fa-rotate-left"></i>
+                <h1>REVIVEE</h1>
+            </div>
+        </div>
+        <div class="header-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="profile">
+                <img src="/images/bintang.jpg" alt="profile">
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Container -->
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" placeholder="Cari diskusi, event, atau member...">
+        </div>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="scrollable-content">
+        <!-- Hero Section -->
+        <div class="community-hero">
+            <div class="hero-content">
+                <h1>Halo, Sobat Bumi! 🌍</h1>
+                <p>Bergabung dengan 15.200+ orang yang peduli lingkungan</p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="number">15.2K+</span>
+                        <span class="label">Member</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number">1.2K+</span>
+                        <span class="label">Diskusi</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number">24</span>
+                        <span class="label">Event</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number">8</span>
+                        <span class="label">Challenge</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="action-btn primary">
+                <i class="fa-regular fa-pen-to-square"></i> Buat Postingan
+            </button>
+            <button class="action-btn">
+                <i class="fa-regular fa-calendar"></i> Cari Event
+            </button>
+            <button class="action-btn">
+                <i class="fa-regular fa-star"></i> Ikut Challenge
+            </button>
+            <button class="action-btn">
+                <i class="fa-regular fa-user-group"></i> Temukan Member
+            </button>
+        </div>
+
+        <!-- Feed Section -->
+        <div class="feed-section">
+            <div class="feed-tabs">
+                <div class="feed-tab active">Terbaru</div>
+                <div class="feed-tab">Populer</div>
+                <div class="feed-tab">Diskusi Panas</div>
+                <div class="feed-tab">Diikuti</div>
+            </div>
+
+            <!-- Post 1 -->
+            <div class="post-item">
+                <div class="post-avatar">RW</div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <span class="author-name">Rina Wijaya</span>
+                            <span class="author-badge">Eco Warrior</span>
+                        </div>
+                        <span class="post-time">2 jam lalu</span>
+                    </div>
+                    <div class="post-title">Tips membersihkan jaket denim vintage?</div>
+                    <div class="post-excerpt">
+                        Baru beli jaket denim preloved vintage 90-an. Ada tips cara membersihkan yang benar?
+                    </div>
+                    <div class="post-tags">
+                        <span class="post-tag">#thrifting</span>
+                        <span class="post-tag">#denim</span>
+                        <span class="post-tag">#tips</span>
+                    </div>
+                    <div class="post-stats">
+                        <span class="post-stat"><i class="fa-regular fa-heart"></i> 24</span>
+                        <span class="post-stat"><i class="fa-regular fa-comment"></i> 8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="post-item">
+                <div class="post-avatar">BS</div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <span class="author-name">Budi Santoso</span>
+                            <span class="author-badge">Tech Expert</span>
+                        </div>
+                        <span class="post-time">5 jam lalu</span>
+                    </div>
+                    <div class="post-title">Review iPhone refurbished 6 bulan</div>
+                    <div class="post-excerpt">
+                        Awalnya ragu beli refurbished, tapi setelah 6 bulan pemakaian ternyata puas!
+                    </div>
+                    <div class="post-tags">
+                        <span class="post-tag">#refurbished</span>
+                        <span class="post-tag">#apple</span>
+                        <span class="post-tag">#review</span>
+                    </div>
+                    <div class="post-stats">
+                        <span class="post-stat"><i class="fa-regular fa-heart"></i> 89</span>
+                        <span class="post-stat"><i class="fa-regular fa-comment"></i> 23</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="post-item">
+                <div class="post-avatar">DL</div>
+                <div class="post-content">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <span class="author-name">Dewi Lestari</span>
+                            <span class="author-badge">Carbon Saver</span>
+                        </div>
+                        <span class="post-time">1 hari lalu</span>
+                    </div>
+                    <div class="post-title">Cara hitung carbon footprint di REVIVEE</div>
+                    <div class="post-excerpt">
+                        Penjelasan lengkap gimana cara AI menghitung estimasi karbon tiap produk.
+                    </div>
+                    <div class="post-tags">
+                        <span class="post-tag">#carbon</span>
+                        <span class="post-tag">#edukasi</span>
+                        <span class="post-tag">#AI</span>
+                    </div>
+                    <div class="post-stats">
+                        <span class="post-stat"><i class="fa-regular fa-heart"></i> 234</span>
+                        <span class="post-stat"><i class="fa-regular fa-comment"></i> 45</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <button style="background: none; border: 1px solid #10b981; color: #10b981; padding: 0.5rem 1.5rem; border-radius: 30px; font-size: 0.8rem;">
+                    Muat Lainnya
+                </button>
+            </div>
+        </div>
+
+        <!-- Trending Topics -->
+        <div class="sidebar-card">
+            <div class="card-header">
+                <h3>🔥 TRENDING TOPICS</h3>
+                <a href="#">Lihat Semua</a>
+            </div>
+            
+            <div class="topic-item">
+                <div class="topic-name">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span>#tips thrifting</span>
+                </div>
+                <span class="topic-count">245</span>
+            </div>
+            <div class="topic-item">
+                <div class="topic-name">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span>#refurbished</span>
+                </div>
+                <span class="topic-count">189</span>
+            </div>
+            <div class="topic-item">
+                <div class="topic-name">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span>#diylokal</span>
+                </div>
+                <span class="topic-count">156</span>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="sidebar-card">
+            <div class="card-header">
+                <h3>📅 UPCOMING EVENTS</h3>
+                <a href="#">Lihat Semua</a>
+            </div>
+            
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">15</span>
+                    <span class="month">MAR</span>
+                </div>
+                <div class="event-details">
+                    <div class="event-title">Workshop Upcycling</div>
+                    <div class="event-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Yogyakarta</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">16</span>
+                    <span class="month">MAR</span>
+                </div>
+                <div class="event-details">
+                    <div class="event-title">Webinar Investasi Hijau</div>
+                    <div class="event-meta">
+                        <span><i class="fa-solid fa-globe"></i> Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenges Section -->
+        <div class="challenges-section">
+            <div class="section-header">
+                <h2>⚡ Challenge Aktif</h2>
+                <a href="#">Lihat Semua →</a>
+            </div>
+
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <span class="challenge-title">#30HariZeroWaste</span>
+                        <span class="challenge-prize">500 poin</span>
+                    </div>
+                    <div class="challenge-desc">
+                        Kurangi sampah plastik selama 30 hari!
+                    </div>
+                    <div class="challenge-meta">
+                        <span><i class="fa-regular fa-user"></i> 234 peserta</span>
+                        <span><i class="fa-regular fa-clock"></i> 12 hari</span>
+                    </div>
+                    <div class="progress-label">
+                        <span>Partisipasi 78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                    <button class="join-challenge">Ikut Challenge</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaders Section -->
+        <div class="section-header">
+            <h2>🌟 Community Leaders</h2>
+            <a href="#">Lihat Semua →</a>
+        </div>
+
+        <div class="leaders-grid">
+            <div class="leader-card">
+                <div class="leader-avatar">SW</div>
+                <div class="leader-name">Sarah Wijaya</div>
+                <div class="leader-title">Eco Ambassador</div>
+                <div class="leader-stats">
+                    <span><i class="fa-regular fa-heart"></i> 2.3K</span>
+                </div>
+            </div>
+
+            <div class="leader-card">
+                <div class="leader-avatar">DP</div>
+                <div class="leader-name">Dimas Prayogo</div>
+                <div class="leader-title">Tech Expert</div>
+                <div class="leader-stats">
+                    <span><i class="fa-regular fa-heart"></i> 1.8K</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Belum Bergabung?</h2>
+            <p>Dapatkan inspirasi dan temukan teman baru!</p>
+            <button class="cta-button">
+                Gabung Sekarang
+            </button>
+        </div>
+
+        <!-- Bottom Padding -->
+        <div class="bottom-padding"></div>
+    </main>
+
+    <!-- BOTTOM NAVBAR - FIXED -->
+    <nav class="bottom-navbar">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="circular.html" class="nav-item">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Circular</span>
+        </a>
+        <a href="finance.html" class="nav-item">
+            <i class="fa-solid fa-coins"></i>
+            <span>Finance</span>
+        </a>
+        <a href="impact.html" class="nav-item">
+            <i class="fa-solid fa-leaf"></i>
+            <span>Impact</span>
+        </a>
+        <a href="community.html" class="nav-item active">
+            <i class="fa-solid fa-users"></i>
+            <span>Komunitas</span>
+        </a>
+    </nav>
+
+    <script>
+        // Simple click handlers
+        document.querySelectorAll('.action-btn, .feed-tab, .post-item, .topic-item, .event-item, .challenge-card, .leader-card, .cta-button').forEach(el => {
+            el.addEventListener('click', function() {
+                alert('Fitur akan segera hadir!');
+            });
+        });
+    </script>
+</body>
+</html>
